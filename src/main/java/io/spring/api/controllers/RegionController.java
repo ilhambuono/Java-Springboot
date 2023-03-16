@@ -64,16 +64,19 @@ public class RegionController {
     //     //return new ResponseEntity<>(region, HttpStatus.OK);
     //     return new ResponseEntity<>(region, HttpStatus.OK);
     // }
+    // Read Data
     @GetMapping("get")
     public ResponseEntity<Object> Get(){
     return ResponseHandler.getResponse("Data Ditemukan", HttpStatus.OK, regionService.Get());
        // return new ResponseEntity<>(customResponse, HttpStatus.OK);
     }
+    //Read Data By ID
     @GetMapping("get/{id}")
     public ResponseEntity<Object> Get(@PathVariable(required = true) Integer id){
 
         return ResponseHandler.getResponse("Data Ditemukan", HttpStatus.OK, regionService.Get(id));
     }
+    //Insert Data
     @PostMapping("save")
     public ResponseEntity<Object> save(@RequestBody Region region){
         Boolean result = regionService.save(region);
@@ -82,6 +85,7 @@ public class RegionController {
         }
         return ResponseHandler.generateResponse("Data gagal Disimpan", HttpStatus.BAD_REQUEST);
     }
+    // Update data
     @PutMapping("edit/{id}")
     public ResponseEntity<Object> edit( @RequestBody Region region, @PathVariable(required = true) Integer id){   
         Region regionbyid = regionService.Get(id);
@@ -93,7 +97,7 @@ public class RegionController {
         }
         return ResponseHandler.generateResponse("Data Gagal DiUpdate", HttpStatus.OK);
     }
-    
+    //Delete Data
     @DeleteMapping("delete/{id}")
     public ResponseEntity<Object> delete(@PathVariable(required = true) Integer id){
         
